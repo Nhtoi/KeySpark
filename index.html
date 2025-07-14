@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<script src="app.js" defer type="module"></script>
-		<link href="style.css" rel="stylesheet" />
-		<link href="./styles/LevelsPage.css" rel="preload" as="style" />
-		<link href="./styles/ProgressPage.css" rel="preload" as="style" />
-		<title>KeySpark</title>
-	</head>
-	<body>
-		<nav class="nav-link">
-			<a class="nav-link" href="/">Home</a>
-			<a class="nav-link" href="/progress">Progress</a>
-			<a class="nav-link" href="/levels">Practice</a>
-		</nav>
-		<main></main>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="app.js" defer type="module"></script>
+    <link href="style.css" rel="stylesheet" />
+    <link href="./styles/LevelsPage.css" rel="preload" as="style" />
+    <link href="./styles/ProgressPage.css" rel="preload" as="style" />
+    <title>KeySpark</title>
+  </head>
+  <body>
+    <nav class="nav-link">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="/levels">Levels</a>
+      <a class="nav-link" href="/progress">Progress</a>
+      <a class="nav-link" href="/settings">Settings</a>
+      <a class="nav-link" href="/about">About</a>
+    </nav>
+    <main></main>
 
-		<template id="progress-template">
-			<h1>PROGRESS</h1>
-		</template>
-		<template id="levels-template">
-			<h1>LEVELS</h1>
-		</template>
-		<!-- <template id="progress-template"></template> -->
-	</body>
+    <template id="home-template">
+      <h1>Home</h1>
+    </template>
+    <template id="levels-template">
+      <h1>levels</h1>
+      <label for="levels"></label>
+      <select id="levels" name="levels">
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+      </select>
+      <button id="select-level">Go</button>
+      <div id="level-information" tabindex="0"></div>
+    </template>
+    <template id="progress-template">
+      <h1>progress</h1>
+    </template>
+    <template id="trainer-template">
+      <h1>trainer</h1>
+    </template>
+    <template id="settings-template">
+      <h1>settings</h1>
+    </template>
+    <template id="about-template">
+      <h1>about</h1>
+    </template>
+    <!-- <template id="progress-template"></template> -->
+  </body>
 </html>

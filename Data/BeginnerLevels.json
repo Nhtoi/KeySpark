@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "difficulty": "Beginner",
+    "description": "Select the word 'Select'",
+    "targetText": "Select",
+    "expectedKeys": ["ControlLeft", "KeyD"]
+  },
+  {
+    "id": 2,
+    "difficulty": "Beginner",
+    "description": "Duplicate the current line",
+    "expectedKeys": ["ShiftLeft", "AltLeft", "ArrowDown"]
+  },
+  {
+    "id": 3,
+    "difficulty": "Beginner",
+    "description": "Open command palette",
+    "expectedKeys": ["ControlLeft", "ShiftLeft", "KeyP"]
+  }
+]
