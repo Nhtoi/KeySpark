@@ -30,11 +30,6 @@ export const Router = {
       case "/progress":
         pageElement = document.createElement("progress-page");
         break;
-
-      case "/trainer/":
-        pageElement = document.createElement("");
-        break;
-
       case "/results":
         pageElement = document.createElement("");
 
@@ -49,6 +44,11 @@ export const Router = {
         break;
 
       default:
+        if (route.startsWith("/trainer-")) {
+          pageElement = document.createElement("trainer-page");
+          const paramId = route.substring(route.lastIndexOf("-") + 1);
+          pageElement.dataset.id = paramId;
+        }
         break;
     }
 

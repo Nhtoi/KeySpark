@@ -35,19 +35,10 @@ export class LevelsPage extends HTMLElement {
       Array.from(levelContainer.children).forEach((element) => {
         element.addEventListener("click", () => {
           const id = element.dataset.id;
-          console.log(id);
-          console.log(level.exercises[id - 1].expectedKeys);
+          window.currentLevel = level;
+          app.router.go(`/trainer-${id}`);
         });
       });
-      const area = document.getElementById("exercise-area");
-      window.addEventListener("keydown", (event) => {
-        if (event.ctrlKey && event.key === "d") {
-          event.preventDefault();
-          console.log("Correct");
-        }
-      });
-      area.focus();
-      console.log(level.exercises);
     };
 
     button.addEventListener("click", () => {
