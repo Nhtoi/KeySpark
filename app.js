@@ -5,6 +5,7 @@ import { Levels } from "./services/Levels.js";
 import { LevelsPage } from "./components/LevelsPage.js";
 import { ProgressPage } from "./components/ProgressPage.js";
 import { TrainerPage } from "./components/TrainerPage.js";
+import { ExerciseController } from "./services/ExerciseController.js";
 
 window.app = {};
 app.router = Router;

@@ -1,21 +1,20 @@
 [
   {
-    "id": 4,
+    "id": 1,
     "difficulty": "Intermediate",
-    "description": "Select the word 'Select'",
-    "targetText": "Select",
-    "expectedKeys": ["ControlLeft", "KeyD"]
+    "description": "Toggle terminal panel",
+    "expectedKeys": ["control", "`"]
   },
   {
-    "id": 5,
+    "id": 2,
     "difficulty": "Intermediate",
-    "description": "Duplicate the current line",
-    "expectedKeys": ["ShiftLeft", "AltLeft", "ArrowDown"]
+    "description": "Comment out the current line",
+    "expectedKeys": ["control", "/"]
   },
   {
-    "id": 6,
+    "id": 3,
     "difficulty": "Intermediate",
-    "description": "Open command palette",
-    "expectedKeys": ["ControlLeft", "ShiftLeft", "KeyP"]
+    "description": "Go to next problem in Problems tab",
+    "expectedKeys": ["f8"]
   }
 ]

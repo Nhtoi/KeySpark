@@ -1,4 +1,5 @@
 import Builder from "../services/Builder.js";
+import { ExerciseController } from "../services/ExerciseController.js";
 import { Levels } from "../services/Levels.js";
 
 export class TrainerPage extends HTMLElement {
@@ -13,33 +14,28 @@ export class TrainerPage extends HTMLElement {
       this.onBuild();
     });
   }
+
   onBuild() {
     if (this.dataset.id) {
       const desc = this.root.querySelector("h2");
-      this.level = window.currentLevel;
-      //console.log(this.level);
-      const currentExercise = this.level.exercises[this.dataset.id - 1];
+      const resetBtn = this.root.getElementById("resetBtn");
+      const level = window.currentLevel;
+      const currentExercise = level.exercises[this.dataset.id - 1];
+
       if (currentExercise) {
-        desc.textContent = currentExercise.description;
-        // const area = this.querySelector(".monaco-editor");
-        window.addEventListener("keydown", (event) => {
-          if (event.ctrlKey && event.key === "d") {
-            desc.style.setProperty("background-color", "green");
-            event.preventDefault();
-            console.log("Correct");
-          } else if (event.ctrlKey && event.key !== "d") {
-            desc.style.setProperty("background-color", "red");
-          }
+        new ExerciseController({
+          root: this.root,
+          level,
+          exercise: currentExercise,
+          desc,
+          resetBtn,
         });
-        desc.focus();
-        // console.log(level.exercises);
       }
     } else {
-      this.root;
+      const desc = this.root.querySelector("h2");
       desc.textContent = "Couldn't Find Exercise";
       alert("Couldn't Get Exercise");
     }
-    //console.log(this.root);
   }
 }
 

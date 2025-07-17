@@ -1,21 +1,32 @@
 [
   {
-    "id": 7,
+    "id": 1,
     "difficulty": "Advanced",
-    "description": "Select the word 'Select'",
-    "targetText": "Select",
-    "expectedKeys": ["ControlLeft", "KeyD"]
+    "description": "Select all occurrences of current word",
+    "expectedKeys": ["control", "shift", "l"]
   },
   {
-    "id": 8,
+    "id": 2,
     "difficulty": "Advanced",
-    "description": "Duplicate the current line",
-    "expectedKeys": ["ShiftLeft", "AltLeft", "ArrowDown"]
+    "description": "Move line down",
+    "expectedKeys": ["alt", "arrowdown"]
   },
   {
-    "id": 9,
+    "id": 3,
     "difficulty": "Advanced",
     "description": "Open command palette",
-    "expectedKeys": ["ControlLeft", "ShiftLeft", "KeyP"]
+    "expectedKeys": ["control", "shift", "p"]
+  },
+  {
+    "id": 4,
+    "difficulty": "Advanced",
+    "description": "Format document",
+    "expectedKeys": ["shift", "alt", "f"]
+  },
+  {
+    "id": 5,
+    "difficulty": "Advanced",
+    "description": "Show all symbols",
+    "expectedKeys": ["control", "t"]
   }
 ]

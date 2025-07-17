@@ -4,18 +4,18 @@
     "difficulty": "Beginner",
     "description": "Select the word 'Select'",
     "targetText": "Select",
-    "expectedKeys": ["ControlLeft", "KeyD"]
+    "expectedKeys": ["control", "d"]
   },
   {
     "id": 2,
     "difficulty": "Beginner",
     "description": "Duplicate the current line",
-    "expectedKeys": ["ShiftLeft", "AltLeft", "ArrowDown"]
+    "expectedKeys": ["shift", "alt", "arrowdown"]
   },
   {
     "id": 3,
     "difficulty": "Beginner",
     "description": "Open command palette",
-    "expectedKeys": ["ControlLeft", "ShiftLeft", "KeyP"]
+    "expectedKeys": ["control", "shift", "p"]
   }
 ]
