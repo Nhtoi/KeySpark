@@ -1,24 +1,29 @@
 import { Levels } from "../services/Levels.js";
 import { setCompleted, getCompleted } from "./Builder.js";
 export class ExerciseController {
-  constructor({ root, level, exercise, desc, resetBtn, id }) {
+  constructor({ root, level, exercise, desc, displayArea, resetBtn }) {
     this.root = root;
     this.level = level;
     this.exercise = exercise;
+    this.displayArea = displayArea;
     this.desc = desc;
     this.resetBtn = resetBtn;
     this.compare = [];
     this.pressedKeys = new Set();
+    this.showAnswerBtn = this.root.getElementById("showAnswerBtn");
+    this.displayAnswer = this.root.getElementById("showAnswerDisplay");
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.startExercise = this.startExercise.bind(this);
     this.resetExercise = this.resetExercise.bind(this);
     this.completed = getCompleted(this.exercise.difficulty, this.exercise.id);
     this.init();
+    this.showAnswerBtn.addEventListener("click", this.showAnswer.bind(this));
   }
-
   init() {
     if (this.completed == true) {
+      this.showAnswerBtn.disable;
       this.desc.style.backgroundColor = "green";
+      this.displayArea.innerHTML = this.exercise.expectedKeys.join(" + ");
     }
     window.addEventListener("keyup", this.handleKeyUp.bind(this));
     this.desc.textContent = this.exercise.description;
@@ -27,7 +32,11 @@ export class ExerciseController {
     }
     this.resetBtn.addEventListener("click", this.resetExercise);
   }
-
+  showAnswer() {
+    console.log("Show Answer");
+    this.displayAnswer.innerHTML = this.exercise.expectedKeys.join(" + ");
+    setTimeout(() => this.clearDisplay(this.displayAnswer), 2000);
+  }
   startExercise() {
     this.compare = [];
     this.desc.style.backgroundColor = "";
@@ -36,7 +45,21 @@ export class ExerciseController {
     window.addEventListener("keydown", this.handleKeyDown);
   }
 
+  displayKey(key) {
+    if (this.displayArea.innerHTML == "") {
+      this.displayArea.innerHTML += `${key}`;
+    } else {
+      this.displayArea.innerHTML += ` + ${key}`;
+    }
+  }
+  clearDisplay(el = this.displayArea) {
+    if (el && el.innerHTML !== undefined) {
+      el.innerHTML = "";
+    }
+  }
+
   resetCompare() {
+    this.clearDisplay();
     this.compare = [];
   }
 
@@ -45,6 +68,7 @@ export class ExerciseController {
     this.completed = false;
     this.desc.style.backgroundColor = "";
     setCompleted(this.exercise.difficulty, this.exercise.id, false);
+    this.clearDisplay();
     this.startExercise();
   }
 
@@ -57,10 +81,10 @@ export class ExerciseController {
   }
 
   handleKeyDown(event) {
-    console.log(this.completed);
     const key = event.key.toLowerCase();
     if (this.completed) return;
     if (!this.pressedKeys.has(key)) {
+      console.log(this.displayKey(key));
       this.pressedKeys.add(key);
       this.compare.push(key);
       if (this.compare.length === this.exercise.expectedKeys.length) {
@@ -72,6 +96,7 @@ export class ExerciseController {
         } else {
           this.desc.style.backgroundColor = "red";
           setTimeout(() => this.resetCompare(), 1000);
+          setTimeout(() => this.clearDisplay(), 1000);
         }
       }
     }

@@ -15,17 +15,18 @@ export class LevelsPage extends HTMLElement {
     });
   }
   onBuilt() {
-    const button = this.root.getElementById("select-level");
+    const levelSelector = this.root.querySelector("select");
+
     const CreateLevel = async (difficulty) => {
       const completedFromLocalStorage = JSON.parse(
         localStorage.getItem("completed")
       );
+
       console.log("ENTIRECOMPLTEDARRAY", completedFromLocalStorage);
       const api = new API();
       const data = await api.fetchExercise(difficulty);
       const level = new Levels(difficulty);
       level.exercises = data;
-
       const levelContainer = this.root.getElementById("level-information");
       levelContainer.innerText = "";
       level.exercises.forEach((element) => {
@@ -33,7 +34,6 @@ export class LevelsPage extends HTMLElement {
         const completed = document.createElement("input");
         completed.setAttribute("type", "checkbox");
         completed.setAttribute("disabled", "true");
-        console.log();
         if (
           completedFromLocalStorage.completed[element.difficulty][element.id] ==
           true
@@ -59,10 +59,11 @@ export class LevelsPage extends HTMLElement {
       });
     };
 
-    button.addEventListener("click", () => {
+    levelSelector.addEventListener("change", () => {
       const difficulty = this.root.getElementById("levels").value;
       CreateLevel(difficulty);
     });
+    CreateLevel("Beginner");
 
     console.log(this.root);
   }

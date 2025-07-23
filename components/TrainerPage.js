@@ -20,6 +20,7 @@ export class TrainerPage extends HTMLElement {
     if (this.dataset.id) {
       const desc = this.root.querySelector("h2");
       const resetBtn = this.root.getElementById("resetBtn");
+      const displayArea = this.root.getElementById("displayArea");
       const level = window.currentLevel;
       const currentExercise = level.exercises[this.dataset.id - 1];
       const isCompleted = getCompleted(
@@ -32,6 +33,7 @@ export class TrainerPage extends HTMLElement {
           level,
           exercise: currentExercise,
           desc,
+          displayArea,
           resetBtn,
           isCompleted,
         });

@@ -35,7 +35,6 @@ export class ProgressPage extends HTMLElement {
               h2.innerText = ex.description;
               container.appendChild(h2);
             }
-            this.root.append(div);
           });
         }
       });
