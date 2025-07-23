@@ -1,7 +1,7 @@
 import Builder from "../services/Builder.js";
 import { ExerciseController } from "../services/ExerciseController.js";
 import { Levels } from "../services/Levels.js";
-
+import { initializeCompleted, getCompleted } from "../services/Builder.js";
 export class TrainerPage extends HTMLElement {
   constructor() {
     super();
@@ -9,6 +9,7 @@ export class TrainerPage extends HTMLElement {
     const elementId = "trainer-template";
     const root = this;
     const builder = new Builder(root, cssPath, elementId);
+
     builder.build().then((root) => {
       this.root = root;
       this.onBuild();
@@ -21,7 +22,10 @@ export class TrainerPage extends HTMLElement {
       const resetBtn = this.root.getElementById("resetBtn");
       const level = window.currentLevel;
       const currentExercise = level.exercises[this.dataset.id - 1];
-
+      const isCompleted = getCompleted(
+        currentExercise.difficulty,
+        currentExercise.id
+      );
       if (currentExercise) {
         new ExerciseController({
           root: this.root,
@@ -29,7 +33,9 @@ export class TrainerPage extends HTMLElement {
           exercise: currentExercise,
           desc,
           resetBtn,
+          isCompleted,
         });
+        //console.log("Completed?", isCompleted);
       }
     } else {
       const desc = this.root.querySelector("h2");

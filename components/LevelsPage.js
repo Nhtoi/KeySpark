@@ -17,7 +17,10 @@ export class LevelsPage extends HTMLElement {
   onBuilt() {
     const button = this.root.getElementById("select-level");
     const CreateLevel = async (difficulty) => {
-      console.log(difficulty);
+      const completedFromLocalStorage = JSON.parse(
+        localStorage.getItem("completed")
+      );
+      console.log("ENTIRECOMPLTEDARRAY", completedFromLocalStorage);
       const api = new API();
       const data = await api.fetchExercise(difficulty);
       const level = new Levels(difficulty);
@@ -27,17 +30,32 @@ export class LevelsPage extends HTMLElement {
       levelContainer.innerText = "";
       level.exercises.forEach((element) => {
         const h1 = document.createElement("h1");
+        const completed = document.createElement("input");
+        completed.setAttribute("type", "checkbox");
+        completed.setAttribute("disabled", "true");
+        console.log();
+        if (
+          completedFromLocalStorage.completed[element.difficulty][element.id] ==
+          true
+        ) {
+          completed.setAttribute("checked", "true");
+        }
+
         h1.dataset.id = element.id;
         const description = element["description"];
         h1.textContent = description;
+        levelContainer.append(completed);
         levelContainer.append(h1);
       });
       Array.from(levelContainer.children).forEach((element) => {
-        element.addEventListener("click", () => {
-          const id = element.dataset.id;
-          window.currentLevel = level;
-          app.router.go(`/trainer-${id}`);
-        });
+        if (element.tagName == "H1") {
+          element.addEventListener("click", function handleClick() {
+            const id = element.dataset.id;
+            element.isCompleted = false;
+            window.currentLevel = level;
+            app.router.go(`/trainer-${id}`);
+          });
+        }
       });
     };
 

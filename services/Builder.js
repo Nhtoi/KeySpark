@@ -24,4 +24,29 @@ export class Builder {
   }
 }
 
+export function initializeCompleted() {
+  if (!localStorage.getItem("completed")) {
+    const data = { completed: {} };
+    ["Beginner", "Intermediate", "Advanced"].forEach((level) => {
+      data.completed[level] = {};
+    });
+    localStorage.setItem("completed", JSON.stringify(data));
+  }
+}
+
+export function getCompleted(difficulty, id) {
+  const data = JSON.parse(localStorage.getItem("completed")) || {
+    completed: {},
+  };
+  return data.completed[difficulty]?.[id] ?? false;
+}
+
+export function setCompleted(difficulty, id, value = true) {
+  const data = JSON.parse(localStorage.getItem("completed")) || {
+    completed: {},
+  };
+  if (!data.completed[difficulty]) data.completed[difficulty] = {};
+  data.completed[difficulty][id] = value;
+  localStorage.setItem("completed", JSON.stringify(data));
+}
 export default Builder;

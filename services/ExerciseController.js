@@ -1,25 +1,25 @@
 import { Levels } from "../services/Levels.js";
-
+import { setCompleted, getCompleted } from "./Builder.js";
 export class ExerciseController {
-  constructor({ root, level, exercise, desc, resetBtn }) {
+  constructor({ root, level, exercise, desc, resetBtn, id }) {
     this.root = root;
     this.level = level;
     this.exercise = exercise;
     this.desc = desc;
     this.resetBtn = resetBtn;
-
     this.compare = [];
-    this.completed = false;
     this.pressedKeys = new Set();
-
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.startExercise = this.startExercise.bind(this);
     this.resetExercise = this.resetExercise.bind(this);
-
+    this.completed = getCompleted(this.exercise.difficulty, this.exercise.id);
     this.init();
   }
 
   init() {
+    if (this.completed == true) {
+      this.desc.style.backgroundColor = "green";
+    }
     window.addEventListener("keyup", this.handleKeyUp.bind(this));
     this.desc.textContent = this.exercise.description;
     if (this.completed == false) {
@@ -44,6 +44,7 @@ export class ExerciseController {
     this.compare = [];
     this.completed = false;
     this.desc.style.backgroundColor = "";
+    setCompleted(this.exercise.difficulty, this.exercise.id, false);
     this.startExercise();
   }
 
@@ -56,6 +57,7 @@ export class ExerciseController {
   }
 
   handleKeyDown(event) {
+    console.log(this.completed);
     const key = event.key.toLowerCase();
     if (this.completed) return;
     if (!this.pressedKeys.has(key)) {
@@ -64,6 +66,7 @@ export class ExerciseController {
       if (this.compare.length === this.exercise.expectedKeys.length) {
         if (this.isCorrect()) {
           this.completed = true;
+          setCompleted(this.exercise.difficulty, this.exercise.id, true);
           this.desc.style.backgroundColor = "green";
           window.removeEventListener("keydown", this.handleKeyDown);
         } else {
